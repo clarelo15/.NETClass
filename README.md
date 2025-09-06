@@ -1,2 +1,2 @@
 # .NETClass
-Assigments
+Assigments and class materials
