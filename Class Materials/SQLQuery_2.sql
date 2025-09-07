@@ -151,7 +151,7 @@ select c.ContactName,
 
 from Customers c
 
---16 Sorts customers by how many orders they¡¯ve placed (most orders first).
+--16 Sorts customers by how many orders theyÂ¡Â¯ve placed (most orders first).
 
 select  ContactName, CustomerID
 from Customers 
