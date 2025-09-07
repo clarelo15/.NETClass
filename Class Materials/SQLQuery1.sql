@@ -37,23 +37,23 @@ select distinct PostalCode + ' ' + Country as 'Postal code and Country' FROM Emp
 
 --Identifiers in SQL
 --identifiers: name we give to db, tables, columns, views
---±íÃû£¨Table Name£©
+--è¡¨åï¼ˆTable Nameï¼‰
 
 
---ÁĞÃû£¨Column Name£©
+--åˆ—åï¼ˆColumn Nameï¼‰
 
 
---±äÁ¿£¨Variable£©
+--å˜é‡ï¼ˆVariableï¼‰
 
 
---ÁÙÊ±±í£¨Temporary Table£©
+--ä¸´æ—¶è¡¨ï¼ˆTemporary Tableï¼‰
 
 
---Ô¼Êø / ±ğÃû£¨Constraint, Alias£©
+--çº¦æŸ / åˆ«åï¼ˆConstraint, Aliasï¼‰
 
 --[] ""
 
---(a¨Cz / A¨CZ)¡¢@ »ò#
+--(aâ€“z / Aâ€“Z)ã€@ æˆ–#
 declare @today datetime
 select @today = getdate()
 print @today
@@ -126,9 +126,9 @@ select * from  dbo.Employees where LastName like 'D%'
 select * from  dbo.Employees where LastName like  '%g%'
 select * from  dbo.Employees where PostalCode like '__[0-3]%'
 select * from  dbo.Employees where PostalCode like '[a-z]%'
---% ¡ú Æ¥Åä0 »ò¶à¸ö×Ö·û
---_ ¡ú Æ¥ÅäÇ¡ºÃÒ»¸ö×Ö·û
---[ ] ¡ú Æ¥Åä·¶Î§£¨Èç [a-z]£¬[0-9]£©
+--% â†’ åŒ¹é…0 æˆ–å¤šä¸ªå­—ç¬¦
+--_ â†’ åŒ¹é…æ°å¥½ä¸€ä¸ªå­—ç¬¦
+--[ ] â†’ åŒ¹é…èŒƒå›´ï¼ˆå¦‚ [a-z]ï¼Œ[0-9]ï¼‰
 --order by statement: sort the result set in ascending or descending order
 
 select * from Orders order by OrderDate asc
