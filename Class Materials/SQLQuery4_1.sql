@@ -1,0 +1,107 @@
+--Transaction Level Demo
+--READ UNCOMMITTED [2]
+--You may see the newly inserted (but not committed) rows
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+SELECT * FROM Product
+
+
+
+
+
+
+
+
+
+--READ COMMITTED [5]
+--You will not see the uncommitted rows
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED
+SELECT *
+FROM PRODUCT
+
+
+
+
+
+
+--READ COMMITTED: Lost Update[7]
+--update Product Quantity to 100 - 4 = 96 immediately
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED
+BEGIN TRAN
+DECLARE @qty int
+SELECT @qty = Quantity FROM Product WHERE ID = 1
+
+SET @qty = @qty - 4
+UPDATE PRODUCT SET Quantity = @qty WHERE ID = 1
+Commit
+
+SELECT * 
+FROM Product
+
+
+
+
+
+
+
+--REPEATABLE READ [9]
+--The data others are using cant be updated
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+BEGIN TRAN;
+UPDATE dbo.Product 
+SET Quantity = Quantity - 4 WHERE Id = 2;
+COMMIT;
+
+
+
+
+
+
+
+--2.READ COMMITTED issue [12]
+--UPDATE PRODUCT SET Quantity = 1000 WHERE ID = 2
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED
+BEGIN TRAN
+UPDATE PRODUCT SET Quantity = 1000 WHERE ID = 2
+COMMIT
+
+
+
+
+--REPEATABLE READ [14]
+--t2 happens after t1 is done
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
+BEGIN TRAN
+UPDATE PRODUCT SET Quantity = 500 WHERE ID = 2
+COMMIT
+
+
+
+
+
+--REPEATABLE READ [15]
+select * from PRODUCT
+
+
+
+
+
+
+
+
+--REPEATABLE READ issue: phantom read [16]
+--t2
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
+BEGIN TRAN
+INSERT INTO PRODUCT VALUES (4, 'Milk', 2, 100)
+COMMIT
+
+
+
+
+--SERIALIZABLE [17]
+--t2
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+BEGIN TRAN
+INSERT INTO PRODUCT VALUES (5,'Juice', 2, 100)
+COMMIT
+select * from PRODUCT
